@@ -1,0 +1,54 @@
+<div>
+  <% flash.each do |key, msg| %>
+    <div class="alert alert-<%= key %>"><%= msg %></div>
+  <% end %>
+</div>
+
+<div>
+  <h1>Add a Party</h1>
+
+  <%= form_for(@party) do |f| %>
+    <% if @party.errors.any? %>
+      <h2>
+        <%= pluralize(@party.errors.count, "error") %>
+      </h2>
+      <ul>
+        <% @party.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <label>Hosted By</label>
+    <%= f.text_field(:host_name), :maxlength => 255 %>
+
+    <label>Host Email</label>
+    <%= f.text_field(:host_email), :maxlength => 255 %>
+
+    <label>Number of Guests</label>
+    <%= f.text_field(:numgsts), :maxlength => 255 %>
+
+    <label>Guest Names (separate by comma ',')</label>
+    <%= f.text_area(:guest_names) %>
+
+    <label>Venue Name</label>
+    <%= f.text_field(:venue), :maxlength => 255 %>
+
+    <label>Venue Location</label>
+    <%= f.text_field(:location), :maxlength => 255 %>
+
+    <label>Party Theme</label>
+    <%= f.text_field(:theme), :maxlength => 255 %>
+
+    <label>Party Start Time</label>
+    <%= f.datetime_select(:when) %>
+
+    <label>Party End Time</label>
+    <%= f.datetime_select(:when_its_over) %>
+
+    <label>Description</label>
+    <%= f.text_area(:descript) %>
+
+    <%= f.submit %>
+  <%- end %>
+</div>
